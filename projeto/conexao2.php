@@ -1,10 +1,13 @@
 <?php 
 
+session_start();
+
 //conexão usando PDO. padrão, sempre o mesmo código
 $localhost = "localhost";
 $user = "root";
 $password = "mysql";
 $banco = "loja";
+global $pdo;
 
 try {
     $pdo = new PDO("mysql:dbname=".$banco."; host=".$localhost, $user, $password);
