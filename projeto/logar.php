@@ -12,17 +12,20 @@ if(isset($_POST['email'], $_POST['senha']) && !empty($_POST['email']) && !empty(
     $senha = addslashes($_POST['senha']);
 
     if($u->login($email, $senha)) {
-        if(isset($_SESSION['idusuario'])) {
+        if(!empty($_SESSION['idusuario'])) {
             header("Location: loja.php");
+            exit;
         } else {
             header("Location: index.php");
+            exit;
         };
     } else {
         header("Location: index.php");
+        exit;
     };
 } else {
     header("Location: index.php");
+    exit;
 };
-
 
 ?>

@@ -10,7 +10,7 @@ class Usuarios {
         $sql->bindValue("senha", md5($senha));
         $sql->execute();
 
-        if($sql->rowCount() > 0) {
+        if($sql->rowCount() == 1) {
             $dado = $sql->fetch();
 
             $_SESSION['idusuario'] = $dado['id'];
