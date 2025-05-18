@@ -12,20 +12,14 @@ if(isset($_POST['email'], $_POST['senha']) && !empty($_POST['email']) && !empty(
     $senha = $_POST['senha'];
 
     if($u->login($email, $senha)) {
-        if(!empty($_SESSION['idusuario'])) {
-            header("Location: loja.php");
-            exit;
-        } else {
-            header("Location: index.php");
-            exit;
-        };
+        header("Location: loja.php");
     } else {
         header("Location: index.php");
         exit;
-    };
+    }
 } else {
     header("Location: index.php");
     exit;
-};
+}
 
 ?>

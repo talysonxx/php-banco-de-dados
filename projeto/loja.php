@@ -1,6 +1,6 @@
 <?php 
 
-// require "conexao2.php";
+require "conexao2.php";
 
 // if(empty($_SESSION['idusuario'])) {
 //     header("Location: index.php");
@@ -9,6 +9,9 @@
 
 require "verificalogin.php";
 verificalogin();
+require_once "Usuarios.class.php";
+$u = new Usuarios();
+$nomeUser = $u->logged($_SESSION['idusuario'])['nome'];
 
 ?>
 
@@ -44,7 +47,7 @@ verificalogin();
                     </li>
                 </ul>
                 <div class="d-flex" role="search">
-                    <label for="">Pedro Lucas</label>
+                    <label for=""><?php echo $nomeUser ?></label>
                     <a href="logout.php">SAIR</a>
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button class="btn btn-outline-success" type="submit">Search</button> -->
