@@ -21,6 +21,16 @@ class Usuarios {
             return false;
         }
     }
+
+    public function logged($id) {
+        global $pdo;
+
+        $array = array();
+
+        $sql = "SELECT * from usuarios WHERE id = :id";
+        $sql = $pdo->prepare($sql);
+        $sql->bindValue("id", $id);
+    }
 };
 
 ?>

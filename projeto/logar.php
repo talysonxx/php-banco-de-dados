@@ -8,8 +8,8 @@ if(isset($_POST['email'], $_POST['senha']) && !empty($_POST['email']) && !empty(
 
     $u = new Usuarios();
     
-    $email = addslashes($_POST['email']);
-    $senha = addslashes($_POST['senha']);
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
 
     if($u->login($email, $senha)) {
         if(!empty($_SESSION['idusuario'])) {
