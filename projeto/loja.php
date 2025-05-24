@@ -11,7 +11,8 @@ require "verificalogin.php";
 verificalogin();
 require_once "Usuarios.class.php";
 $u = new Usuarios();
-$nomeUser = $u->logged($_SESSION['idusuario'])['nome'];
+// $nomeUser = $u->logged($_SESSION['idusuario'])['nome'];
+$nomeUser = $u->logged($_SESSION['idusuario']);
 
 ?>
 
@@ -27,27 +28,27 @@ $nomeUser = $u->logged($_SESSION['idusuario'])['nome'];
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Loja com PHP</a>
+            <a class="navbar-brand" href="loja.php">Loja com PHP</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Início</a>
+                    <a class="nav-link active" aria-current="page" href="loja.php">Início</a>
                     </li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Cadastro
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Clientes</a></li>
-                        <li><a class="dropdown-item" href="#">Produtos</a></li>
+                        <li><a class="dropdown-item" href="loja.php?pg=clientes">Clientes</a></li>
+                        <li><a class="dropdown-item" href="loja.php?pg=produtos">Produtos</a></li>
                     </ul>
                     </li>
                 </ul>
                 <div class="d-flex" role="search">
-                    <label for=""><?php echo $nomeUser ?></label>
+                    <label for=""><?php echo $nomeUser['nome'] ?></label>
                     <a href="logout.php">SAIR</a>
                     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button class="btn btn-outline-success" type="submit">Search</button> -->
@@ -55,6 +56,31 @@ $nomeUser = $u->logged($_SESSION['idusuario'])['nome'];
             </div>
         </div>
     </nav>
+
+    <main>
+        <div class="container-fluid">
+            <!-- <h1>Olá, <?php echo $nomeUser['nome'] ?>, seja bem-vindo(a)</h1>
+            <h1>Seu email é: <?php echo $nomeUser['email'] ?></h1> -->
+
+            <?php 
+            $pg = "";
+            if(isset($_GET['pg']) && !empty($_GET['pg'])) {
+                $pg = $_GET['pg'];
+            } 
+            // echo $pg;
+
+            switch($pg) {
+                case 'clientes' : require "clientes.php";
+                break;
+
+                case 'produtos' : require "produtos.php";
+                break;
+
+                default : require "home.php";
+            }
+            ?>
+        </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>

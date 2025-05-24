@@ -46,7 +46,7 @@ class Usuarios {
 
         $array = array();
 
-        $sql = "SELECT nome from usuarios WHERE id = :id";
+        $sql = "SELECT * from usuarios WHERE id = :id";
         $sql = $pdo->prepare($sql);
         $sql->bindValue("id", $id);
         $sql->execute();
